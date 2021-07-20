@@ -11,10 +11,11 @@ function ExpenseItem(props) {
    /* expenseTitle = props.title; */
   let expenseAmount = props.amount;
 
-  const clickHandler = ()=>{
+/*   const clickHandler = ()=>{
     console.log("clicked");
     setTitle('updated');
-   }
+   } */
+   
   return (
    
       <Card className="expense-item">

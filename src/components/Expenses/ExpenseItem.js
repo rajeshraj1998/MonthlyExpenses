@@ -34,13 +34,13 @@ function ExpenseItem(props) {
           
           <div className="expense-item_icon_container">
         <div className="expense-item__icons ">
-          <Grid item xs={8} onClick={delClickHandler}>
+          <Grid item xs={10} onClick={delClickHandler}>
             <DeleteOutlinedIcon />
           </Grid>
         </div>
 
         <div className="expense-item__icons">
-          <Grid item xs={8} onClick={editClickHandler}>
+          <Grid item xs={10} onClick={editClickHandler}>
             <EditIcon />
           </Grid>
         </div>

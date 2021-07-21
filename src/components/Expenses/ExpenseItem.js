@@ -1,34 +1,61 @@
-import React, {useState} from 'react';
+import React, { useState } from "react";
 import "./ExpenseItem.css";
-import Card from '../ui/Card';
-
+import Card from "../ui/Card";
+import Grid from "@material-ui/core/Grid";
+import DeleteOutlinedIcon from "@material-ui/icons/DeleteOutlined";
+import EditIcon from "@material-ui/icons/Edit";
+import EditExistingExpense from "./EditExistingExpense";
 import ExpenseDate from "./ExpenseDate";
 
-
 function ExpenseItem(props) {
+  const [editCheck, changeEditCheck] = useState(false);
 
-  const [expenseTitle, setTitle] = useState(props.title);
-   /* expenseTitle = props.title; */
-  let expenseAmount = props.amount;
+  const delClickHandler = () => {
+    props.delParOne(props.id);
+  };
 
-/*   const clickHandler = ()=>{
-    console.log("clicked");
-    setTitle('updated');
-   } */
-   
+  const editClickHandler = () => {
+    changeEditCheck((prevState) => !prevState);
+  };
+
+  const updateDetails = (data) => {
+    props.editParOne(data);
+  };
+
   return (
-   
-      <Card className="expense-item">
+    <Card className="expense-item-container">
+      <div className="expense-item">
         <ExpenseDate date={props.date} />
         <div className="expense-item__description">
-          <h2>{expenseTitle}</h2>
-          <div className="expense-item__price">{expenseAmount}</div>
+          <h2>{props.title}</h2>
+          
+          <div className="expense-item__icons">{"$ " + props.amount}</div>
+          </div>
+          
+          <div className="expense-item_icon_container">
+        <div className="expense-item__icons ">
+          <Grid item xs={8} onClick={delClickHandler}>
+            <DeleteOutlinedIcon />
+          </Grid>
         </div>
-      {/*   <button onClick = {clickHandler}>
-            change Title
-        </button> */}
-      </Card>
-  
+
+        <div className="expense-item__icons">
+          <Grid item xs={8} onClick={editClickHandler}>
+            <EditIcon />
+          </Grid>
+        </div>
+        </div>
+        </div>
+     
+
+      {editCheck && (
+        <EditExistingExpense
+          className="expense-item"
+          data={props}
+          closeEdit={editClickHandler}
+          editParTwo={updateDetails}></EditExistingExpense>
+      )}
+    </Card>
   );
 }
 
